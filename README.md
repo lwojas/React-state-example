@@ -19,3 +19,21 @@ import { useState, useEffect } from "react";
         set_numLikes(numLikes + 1);
     };
   ```
+  
+### useEffect
+
+useEffect fires after the component is mounted, use the array to only listen to defined state variable changes
+
+```js
+  useEffect(() => {
+    console.log("The useEffect action!");
+  }, [numLikes]);
+```
+
+Leaving the array empty will fire useEffect automatically once the component has been mounted, good for loading async data
+
+```js
+  useEffect(() => {
+    console.log("The useEffect action!");
+  }, []);
+```
