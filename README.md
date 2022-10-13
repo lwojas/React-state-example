@@ -6,7 +6,7 @@ A simple app to shawcase state function components
 
 ### useState
 
-```
+```js
 // Import the hooks into the component
 import { useState, useEffect } from "react";
 
