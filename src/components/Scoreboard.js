@@ -1,17 +1,15 @@
 import { useState } from "react";
 import Player from "./Player";
 import AddPlayerForm from "./AddPlayerForm";
+import SortPanel from "./SortPanel";
 
-const sortMethods = {
-  score(player_a, player_b) {
-    return player_b.score - player_a.score;
-  },
-  name(player_a, player_b) {
-    let order = player_a.name.localeCompare(player_b.name);
-    return order;
-  },
+const getRandomNumber = () => {
+  return Math.floor(Math.random() * 10000);
 };
 
+// Component declaration
+
+// Set up scoreboard
 const Scoreboard = () => {
   const [players, set_players] = useState([
     { id: 1, name: "Violeta", score: 11 },
@@ -20,8 +18,7 @@ const Scoreboard = () => {
     { id: 4, name: "Lisa", score: 42 },
   ]);
 
-  let lastID = 0;
-
+  //   Reset all scores
   const resetScore = () => {
     const newArray = players.map((player) => {
       player.score = 0;
@@ -30,23 +27,38 @@ const Scoreboard = () => {
     set_players(newArray);
   };
 
+  //   Increment the score on button press
   const incrementScore = (id) => {
     const newArray = players.map((player, index) => {
       if (player.id === id) {
         player.score++;
         return player;
-        // console.log(player);
       } else {
         return player;
       }
     });
-    // console.log(newArray);
     set_players(newArray);
   };
 
+  //   Add a new player by duplicating and overwriting the original 'players' array
+  const setNewPlayer = (name) => {
+    const newPlayer = { name: name, score: 0, id: getRandomNumber() };
+    const newArray = [...players, newPlayer];
+    set_players(newArray);
+  };
+
+  //   Sorting functions see the 'sort_by useState' hook below
+  const sortMethods = {
+    score(player_a, player_b) {
+      return player_b.score - player_a.score;
+    },
+    name(player_a, player_b) {
+      let order = player_a.name.localeCompare(player_b.name);
+      return order;
+    },
+  };
+
   const [sort_by, set_sort_by] = useState("score"); // either "score" or "name"
-  // first "copy" the array
-  // then sort it with the `compare_score` callback function
   const players_sorted = [...players].sort(sortMethods[sort_by]);
 
   const change_sorting = (event) => {
@@ -54,41 +66,32 @@ const Scoreboard = () => {
     set_sort_by(event.target.value);
   };
 
-  const setNewPlayer = (name) => {
-    lastID++;
-    const newPlayer = { name: name, score: 0, id: lastID };
-    // Something
-    const newArray = [...players, newPlayer];
-    set_players(newArray);
-  };
-
+  //   Render the HTML
   return (
     <div className="Scoreboard">
-      <p>Player's scores:</p>
-      <p>
-        Sort order:{" "}
-        <select onChange={change_sorting} value={sort_by}>
-          <option value="score">Sort by score</option>
-          <option value="name">Sort by name</option>
-        </select>
-      </p>
-      <button onClick={resetScore}>Reset scores</button>
-      <ul>
-        {players_sorted.map((player, index) => {
-          lastID = player.id;
-          return (
-            <Player
-              name={player.name}
-              score={player.score}
-              key={player.id}
-              incrementScore={incrementScore}
-              id={player.id}
-            />
-          );
-        })}
-      </ul>
+      <SortPanel
+        change_sorting={change_sorting}
+        sort_by={sort_by}
+        resetScore={resetScore}
+      />
       <div>
         <AddPlayerForm addPlayer={setNewPlayer} />
+      </div>
+      <div className="score-table">
+        <h3>Player's scores:</h3>
+        <ul>
+          {players_sorted.map((player, index) => {
+            return (
+              <Player
+                name={player.name}
+                score={player.score}
+                key={player.id}
+                incrementScore={incrementScore}
+                id={player.id}
+              />
+            );
+          })}
+        </ul>
       </div>
     </div>
   );
