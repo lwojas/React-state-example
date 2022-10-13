@@ -26,7 +26,7 @@ useEffect fires after the component is mounted, use the array to only listen to 
 
 ```js
   useEffect(() => {
-    console.log("The useEffect action!");
+    console.log("I will fire only when numLikes changes after a re-render ");
   }, [numLikes]);
 ```
 
@@ -34,6 +34,6 @@ Leaving the array empty will fire useEffect automatically once the component has
 
 ```js
   useEffect(() => {
-    console.log("The useEffect action!");
+    console.log("I will fire once after the component is first mounted, bye!");
   }, []);
 ```
