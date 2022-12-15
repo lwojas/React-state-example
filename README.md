@@ -1,6 +1,6 @@
-# React state example
+# React Scoreboard app
 
-A simple app to shawcase state function components
+A simple app to showcase React hooks
 
 ## Cheat sheet
 
