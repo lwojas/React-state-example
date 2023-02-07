@@ -3,12 +3,15 @@ const Player = (props) => {
     props.incrementScore(props.id);
   };
   return (
-    <div className="flex-row">
+    <div className="flex-row shadow-default">
       <li className="Player">
         <b>{props.name}</b>
-        <p>(score: {props.score})</p>
       </li>
+
+      <p>{props.score}</p>
+      <li className="Player"></li>
       <button onClick={onClickIncrement}>Increment</button>
+      <div className="button-close">✖</div>
     </div>
   );
 };

@@ -1,7 +1,9 @@
 import { useState } from "react";
+
 import Player from "./Player";
 import AddPlayerForm from "./AddPlayerForm";
 import SortPanel from "./SortPanel";
+import ResetScores from "./ResetScores";
 
 const getRandomNumber = () => {
   return Math.floor(Math.random() * 10000);
@@ -68,32 +70,30 @@ const Scoreboard = () => {
 
   //   Render the HTML
   return (
-    <div className="Scoreboard">
-      <SortPanel
-        change_sorting={change_sorting}
-        sort_by={sort_by}
-        resetScore={resetScore}
-      />
-      <div>
-        <AddPlayerForm addPlayer={setNewPlayer} />
+    <>
+      <div className="Scoreboard">
+        <div>
+          <AddPlayerForm addPlayer={setNewPlayer} />
+        </div>
+        <div className="score-table">
+          <SortPanel change_sorting={change_sorting} sort_by={sort_by} />
+          <ul className="flex-col gap-xs margin-bottom-small">
+            {players_sorted.map((player, index) => {
+              return (
+                <Player
+                  name={player.name}
+                  score={player.score}
+                  key={player.id}
+                  incrementScore={incrementScore}
+                  id={player.id}
+                />
+              );
+            })}
+          </ul>
+        </div>
       </div>
-      <div className="score-table">
-        <h3>Player's scores:</h3>
-        <ul>
-          {players_sorted.map((player, index) => {
-            return (
-              <Player
-                name={player.name}
-                score={player.score}
-                key={player.id}
-                incrementScore={incrementScore}
-                id={player.id}
-              />
-            );
-          })}
-        </ul>
-      </div>
-    </div>
+      <ResetScores resetScore={resetScore} />
+    </>
   );
 };
 

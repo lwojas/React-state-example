@@ -4,9 +4,9 @@ const AddPlayerForm = (props) => {
   const [name, set_name] = useState("");
 
   return (
-    <div className="AddPlayerForm">
-      <h3>New player: </h3>
-      <p className="flex-row">
+    <div className="AddPlayerForm margin-bottom-med">
+      <h3 className="margin-bottom-xs">Add a new player</h3>
+      <p className="flex-row gap-xs">
         <input
           type="text"
           placeholder="Name"
