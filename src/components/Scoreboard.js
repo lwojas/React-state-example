@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 import Player from "./Player";
 import AddPlayerForm from "./AddPlayerForm";
@@ -24,6 +24,17 @@ const Scoreboard = () => {
   const resetScore = () => {
     const newArray = players.map((player) => {
       player.score = 0;
+      return player;
+    });
+    set_players(newArray);
+  };
+
+  const removePlayer = (id) => {
+    var newArray = [];
+    const newMap = players.map((player) => {
+      if (player.id !== id) {
+        newArray.push(player);
+      }
       return player;
     });
     set_players(newArray);
@@ -81,11 +92,12 @@ const Scoreboard = () => {
             {players_sorted.map((player, index) => {
               return (
                 <Player
+                  key={index}
                   name={player.name}
                   score={player.score}
-                  key={player.id}
                   incrementScore={incrementScore}
                   id={player.id}
+                  removePlayer={removePlayer}
                 />
               );
             })}

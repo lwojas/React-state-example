@@ -35,11 +35,16 @@ main {
 } */
 
 ul div {
+  /* opacity: 0; */
   background-color: #fff;
   transition: all 0.4s ease;
   border-radius: 1rem;
   padding: 1.5rem 1.5rem 1.5rem 2rem;
   position: relative;
+}
+
+.fade-up {
+  opacity: 1;
 }
 
 h3 {
@@ -126,9 +131,9 @@ select:focus {
   width: 2rem;
   height: 2rem;
   right: -1rem;
-  top: -1rem;
+  top: -0.5rem;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: #dae7ec;
   color: var(--color-secondary-label);
   font-size: 1rem;
   cursor: pointer;
@@ -139,4 +144,23 @@ select:focus {
   line-height: 2;
   padding: 0px;
   text-align: center;
+}
+
+.my-node-enter,
+.appear-enter {
+  opacity: 0;
+}
+.my-node-enter-active,
+.appear-enter-active {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+.my-node-exit,
+.appear--exit {
+  opacity: 1;
+}
+.my-node-exit-active,
+.appear-exit-active {
+  opacity: 0;
+  transition: opacity 500ms;
 }
