@@ -1,6 +1,8 @@
 # React Scoreboard app
 
-A simple app to showcase React hooks and animations
+A simple app to showcase React hooks and animations. 
+
+Players can be added and removed from the table, scores can be incremented for each player.
 
 ## Libraries / APIs
 
