@@ -1,39 +1,21 @@
 # React Scoreboard app
 
-A simple app to showcase React hooks
+A simple app to showcase React hooks and animations
 
-## Cheat sheet
+## Libraries / APIs
 
-### useState
+- React hooks: useEffect and useState
+- React-spring animation library
 
-```js
-// Import the hooks into the component
-import { useState, useEffect } from "react";
+## Features
 
-// useState declared inside component
-    // Create the useState variable
-    const [numLikes, set_numLikes] = useState(initial_numLikes); // <- using state!
+- Add and remove players to the table
+- Sort by name and score
+- Uses react-spring library to animate a new player being added (better UX)
 
-    // Component will re-render everytime the 'setter' function is called
-    const increment = () => {
-        set_numLikes(numLikes + 1);
-    };
-  ```
-  
-### useEffect
+## To do
+- [ ] Add an animation for removing a player
+- [ ] Add an animation when the scoreboard position changes
 
-useEffect fires after the component is mounted, use the array to only listen to defined state variable changes
-
-```js
-  useEffect(() => {
-    console.log("I will fire only when numLikes changes after a re-render ");
-  }, [numLikes]);
-```
-
-Leaving the array empty will fire useEffect automatically once the component has been mounted, good for loading async data
-
-```js
-  useEffect(() => {
-    console.log("I will fire once after the component is first mounted, bye!");
-  }, []);
-```
+## Contact
+lechwojas@gmail.com
